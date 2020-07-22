@@ -1,5 +1,29 @@
 #include "binary_trees.h"
 
+
+/**
+ * height - get height of a node
+ * @tree: binary tree
+ * Return: height of node
+ */
+
+size_t height(const binary_tree_t *tree)
+{
+	size_t left, right;
+
+	if (!tree)
+		return (0);
+
+	left = binary_tree_height(tree->left);
+	right = binary_tree_height(tree->right);
+
+	if (left > right)
+		return (left + 1);
+	return (right + 1);
+}
+
+
+
 /**
  * binary_tree_balance - get balance of a node
  * @tree: binary tree
@@ -13,7 +37,7 @@ int binary_tree_balance(const binary_tree_t *tree)
 	if (!tree)
 		return (0);
 
-	left = binary_tree_balance(tree->left);
-	right = binary_tree_balance(tree->right);
+	left = height(tree->left);
+	right = height(tree->right);
 	return (left - right);
 }
